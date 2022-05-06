@@ -1,0 +1,83 @@
+<style>
+    body {
+        margin: 0;
+        background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);;
+    }
+    .gbox {
+        display: grid;
+        width: 256px;
+        height: 350px;
+        background: linear-gradient(0deg,#000 -10%, #fff0 180%);
+        grid-template-rows: max-content max-content auto;
+    }
+    .gbox.active {
+        background: none
+    }
+
+    .onoff {
+        width: 96px;
+        height: 96px;
+        border-radius: 96px;
+        background: linear-gradient(0deg,rgba(50,50,150,0.1) 0%, rgba(50,50,150,0.1) 100%);
+        border: solid 2px rgb(50,50,150);
+        font-size: 18px;
+        color: rgb(255, 255, 255);
+
+        justify-self: center;
+        align-self: center;
+        grid-row: 3;
+    }
+
+    .onoff:hover {
+        background: linear-gradient(0deg,rgba(50,50,150,0.5) 0%, rgba(50,50,150,0.1) 100%);
+    }
+
+    .onoff.active {
+        background: linear-gradient(0deg,rgb(96, 96, 253) 0%, rgb(65, 65, 255) 100%);
+    }
+
+    .onoff.active:hover {
+        background: linear-gradient(0deg,rgb(33, 33, 90) 0%, rgb(65, 65, 255) 100%);
+    }
+
+    .title {
+        font-family: "Segoe UI";
+        font-size: 18px;
+        color: white;
+
+        grid-row: 1;
+        justify-self: center;
+    }
+    .status {
+        font-family: "Segoe UI";
+        font-size: 28px;
+        background: linear-gradient(90deg, rgb(96, 96, 253) -20%, rgb(65, 65, 255) 120%);
+        color: transparent;
+        -webkit-background-clip: text;
+        background-clip: text;
+
+        grid-row: 2;
+        justify-self: center;
+    }
+    .status.active {
+        font-family: "Segoe UI";
+        font-size: 28px;
+        background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+        color: transparent;
+        -webkit-background-clip: text;
+        background-clip: text;
+
+        grid-row: 2;
+        justify-self: center;
+    }
+</style>
+<body>
+    <div class="gbox">
+        <span class="title">You are</span>
+        <span class="status">Unseen</span>
+        <button class="onoff">OFF</button>
+    </div>
+</body>
+<script src="popup.js">
+
+</script>
