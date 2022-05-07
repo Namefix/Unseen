@@ -1,3 +1,5 @@
+<img src="/icons/Unseen128.png">
+
 # Unseen
 Chrome extension to disable Instagram "seen" status in stories and messages.
 
