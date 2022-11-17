@@ -6,7 +6,6 @@ function update() {
     let reciever = chrome.storage.sync.get("status");
     reciever.then((storage) => {
         let status = storage.status;
-        console.log(status)
         let updated = false;
         if(status.story) {
             storyswitch.checked = true;

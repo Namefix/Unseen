@@ -25,7 +25,6 @@ function updateSeen(story, chat) { // TRUE = BLOCK / FALSE = ALLOW
             }
         ],
     });
-    console.log(story, story?"block":"allow", chat, chat?"block":"allow")
 }
 
 chrome.runtime.onInstalled.addListener(async () => {
@@ -52,13 +51,11 @@ chrome.windows.onCreated.addListener(function() {
 
 
 chrome.storage.onChanged.addListener((changes, areaname) => {
-    console.log("hey", changes)
     if(!changes.status) return;
     let reciever = chrome.storage.sync.get("status");
     reciever.then((storage) => {
         let status = storage.status;
 
-        console.log(status)
         updateSeen(status.story, status.chat);
         if(status.story || status.chat) chrome.action.setIcon({path: "icons/Unseen128.png"});
         else chrome.action.setIcon({path: "icons/Seen128.png"});
