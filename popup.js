@@ -1,61 +1,40 @@
-let storyswitch = document.querySelector(".storyswitch input");
-let chatswitch = document.querySelector(".chatswitch input");
+let button = document.querySelector(".onoff");
 let seentext = document.querySelector(".status");
 
-function update() {
-    let reciever = chrome.storage.sync.get("status");
-    reciever.then((storage) => {
-        let status = storage.status;
-        console.log(status)
-        let updated = false;
-        if(status.story) {
-            storyswitch.checked = true;
-            updated=true;
-        } else {
-            storyswitch.checked = false;
-        }
-        if(status.chat) {
-            chatswitch.checked = true;
-            updated=true;
-        } else {
-            chatswitch.checked = false;
-        }
-
-        if(updated) {
-            seentext.classList.add("active"); 
-            seentext.innerText = "Unseen";
-        } else {
-            seentext.innerText = "Seen";
-            seentext.classList.remove("active"); 
-        }
-    });
-}
-update();
-
-
-storyswitch.addEventListener("click", () => {
-    let reciever = chrome.storage.sync.get("status");
-    reciever.then((storage) => {
-        let status = storage.status;
-        if(status.story) {
-            chrome.storage.sync.set({ status: {story:false,chat:status.chat} });
-            update();
-        } else {
-            chrome.storage.sync.set({ status: {story:true,chat:status.chat} });
-            update();
-        }
-    })
+let reciever = chrome.storage.sync.get("status");
+reciever.then((storage) => {
+    let status = storage.status;
+    console.log(status)
+    if(status) {
+        button.classList.add("active");
+        button.innerText = "ON";
+        seentext.classList.add("active"); 
+        seentext.innerText = "Unseen";
+    } else {
+        button.classList.remove("active");
+        button.innerText = "OFF";
+        button.classList.remove("active");
+        seentext.innerText = "Seen";
+    }
 });
-chatswitch.addEventListener("click", () => {
+
+
+button.addEventListener("click", () => {
     let reciever = chrome.storage.sync.get("status");
     reciever.then((storage) => {
         let status = storage.status;
-        if(status.chat) {
-            chrome.storage.sync.set({ status: {story:status.story,chat:false} });
-            update();
+        if(status) {
+            chrome.storage.sync.set({ status: false });
+            button.classList.remove("active");
+            button.innerText = "OFF";
+            seentext.classList.remove("active");
+            seentext.innerText = "Seen";
         } else {
-            chrome.storage.sync.set({ status: {story:status.story,chat:true} });
-            update();
+            chrome.storage.sync.set({ status: true });
+            button.classList.add("active");
+            button.innerText = "ON";
+            seentext.classList.add("active");
+            seentext.innerText = "Unseen";
         }
     })
 });
