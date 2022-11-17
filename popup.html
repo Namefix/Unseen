@@ -8,36 +8,10 @@
         width: 256px;
         height: 350px;
         background: linear-gradient(0deg,#000 -10%, #fff0 180%);
-        grid-template-rows: max-content max-content auto;
+        grid-template-rows: max-content max-content auto min-content min-content;
     }
     .gbox.active {
         background: none
-    }
-
-    .onoff {
-        width: 96px;
-        height: 96px;
-        border-radius: 96px;
-        background: linear-gradient(0deg,rgba(50,50,150,0.1) 0%, rgba(50,50,150,0.1) 100%);
-        border: solid 2px rgb(50,50,150);
-        font-size: 18px;
-        color: rgb(255, 255, 255);
-
-        justify-self: center;
-        align-self: center;
-        grid-row: 3;
-    }
-
-    .onoff:hover {
-        background: linear-gradient(0deg,rgba(50,50,150,0.5) 0%, rgba(50,50,150,0.1) 100%);
-    }
-
-    .onoff.active {
-        background: linear-gradient(0deg,rgb(96, 96, 253) 0%, rgb(65, 65, 255) 100%);
-    }
-
-    .onoff.active:hover {
-        background: linear-gradient(0deg,rgb(33, 33, 90) 0%, rgb(65, 65, 255) 100%);
     }
 
     .title {
@@ -60,22 +34,109 @@
         justify-self: center;
     }
     .status.active {
-        font-family: "Segoe UI";
-        font-size: 28px;
         background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
         color: transparent;
         -webkit-background-clip: text;
         background-clip: text;
+    }
 
-        grid-row: 2;
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
         justify-self: center;
+    }
+
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    input:checked + .slider {
+        background-color: #2196F3;
+    }
+
+    input:focus + .slider {
+        box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked + .slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+    }
+
+    .slider.round {
+        border-radius: 34px;
+    }
+
+    .slider.round:before {
+        border-radius: 50%;
+    }
+
+    .storyswitch {
+        grid-row: 4;
+        grid-column: 1;
+    }
+    .chatswitch {
+        grid-row: 6;
+    }
+
+    .text {
+        font-family: "Segoe UI";
+        font-size: 18px;
+        color: white;
+        justify-self: center;
+    }
+    .storytext {
+        grid-row: 3;
+        align-self: end;
+    }
+    .chattext {
+        grid-row: 5;
+        align-self: end;
     }
 </style>
 <body>
     <div class="gbox">
         <span class="title">You are</span>
         <span class="status">Unseen</span>
-        <button class="onoff">OFF</button>
+        <span class="text storytext">Stories</span>
+        <label class="switch storyswitch">
+            <input type="checkbox">
+            <span class="slider round"></span>
+          </label>
+        <span class="text chattext">Chat Messages</span>
+        <label class="switch chatswitch">
+            <input type="checkbox">
+            <span class="slider round"></span>
+        </label>
     </div>
 </body>
 <script src="popup.js">
